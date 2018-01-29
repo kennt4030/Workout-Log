@@ -1,0 +1,22 @@
+{
+  "name": "workoutlogclient",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Kenny <kenny47201@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "bootstrap": "^4.0.0"
+  }
+}
