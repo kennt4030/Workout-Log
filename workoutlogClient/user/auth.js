@@ -13,7 +13,8 @@ $(function() {
              signup.done(function(data) {
                 if (data.sessionToken) {
                    WorkoutLog.setAuthHeader(data.sessionToken);
-                   
+                   console.log("You made it!");
+                   console.log(data.sessionToken);
                 }
                 $("#signup-modal").modal("hide");
                 $(".disabled").removeClass("disabled");
@@ -39,16 +40,17 @@ $(function() {
             login.done(function(data) {
                 if (data.sessionToken) {
                 WorkoutLog.setAuthHeader(data.sessionToken);
-                
-                }
-                // TODO: add logic to set user and auth token	
-                $("#login-modal").modal("hide");
-                $(".disabled").removeClass("disabled");
-                $("#loginout").text("Logout");
-            })
-            .fail(function() {
-                $("#li_error").text("There was an issue with your username or password").show();
-               });
+                console.log(data.sessionToken);
+             }
+             
+            // TODO: add logic to set user and auth token	
+            $("#login-modal").modal("hide");
+            $(".disabled").removeClass("disabled");
+            $("#loginout").text("Logout");
+        })
+        .fail(function() {
+            $("#li_error").text("There was an issue with your username or password").show();
+            });
        },
  
        loginout: function() {
