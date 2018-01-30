@@ -12,6 +12,8 @@ sequelize.authenticate().then(
 		console.log(err);
 	}
 );
-var User = sequelize.import('./model/user');
+
+
+var User = sequelize.import('./models/user');
 
 module.exports = sequelize;

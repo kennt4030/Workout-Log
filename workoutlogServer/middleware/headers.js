@@ -10,7 +10,7 @@
 		//http://workoutlog.net/: Different domain
 		//http://workoutlog.com:8000/history.html: //
 
-module.exports = function(req,res,next){
-    res.header('access-control-allow-origin','*');
-    next();
-};
+		module.exports = function(req, res, next){
+			res.header('access-control-allow-origin', '*');
+			next();
+		};
