@@ -17,7 +17,7 @@ app.use('/api/user', require('./routes/user'));
 // logging in a user
 app.use('/api/login', require('./routes/session'));
 // localhost:3000/api/login/
-//app.use('/app/definition', require('./routes/definition'));
+app.use('/app/definition', require('./routes/definition'));
 
 //app.use('/api/log', require('./routes/log'));
 
