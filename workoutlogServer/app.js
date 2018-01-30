@@ -4,7 +4,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var sequelize = require('./db');
-var User = sequelize.import('./models./user');
+var User = sequelize.import('./models/user');
 
 //Create table
 User.sync(); // sync( {force: true}), to drop then create each time the app starts!
@@ -17,9 +17,9 @@ app.use('/api/user', require('./routes/user'));
 // logging in a user
 app.use('/api/login', require('./routes/session'));
 // localhost:3000/api/login/
-app.use('/app/definition', require('./routes/definition'));
+//app.use('/app/definition', require('./routes/definition'));
 
-app.use('/api/log', require('./routes/log'));
+//app.use('/api/log', require('./routes/log'));
 
 app.use('/api/test', function(req, res){
 	res.send("<h1>Hello World</h1>");
