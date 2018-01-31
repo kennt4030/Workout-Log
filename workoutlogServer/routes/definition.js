@@ -7,24 +7,24 @@ router.post('/', function(req, res) {
 	//variables
 	    var description = req.body.definition.desc;
         var logType= req.body.definition.type;
-        var owner = req.user.id;
+        var owner = req.userid;
 
 	//methods
 	Definition
 	//objects must match the model 
-	.create({ 
-	   	description: description,
-	   	logType: logType,
-	   	owner: owner
+	    .create({ 
+	   	    description: description,
+	   	    logType: logType,
+	   	    owner: owner
 	   })
 
 		.then(
-				function createSuccess(definition) {
-				//send a response as json
-		   		res.json({
-		   			definition: definition
-		   		});
-		   	}, 
+			function createSuccess(definition) {
+			//send a response as json
+		   	res.json({
+		   		definition: definition
+		   	});
+		}, 
 		   function createError(err) {
 		       res.send(500, err.message);
 		   }
