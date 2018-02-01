@@ -3,7 +3,9 @@ $(function() {
        signup: function() {
              var username = $("#su_username").val();
              var password = $("#su_password").val();
+             console.log("username:", username)
              var user = {user:  {username: username, password: password }};
+             console.log(user)
              var signup = $.ajax({
                 type: "POST", 
                 url: WorkoutLog.API_BASE + "user", 
@@ -13,14 +15,19 @@ $(function() {
              signup.done(function(data) {
                 if (data.sessionToken) {
                    WorkoutLog.setAuthHeader(data.sessionToken);
-                   console.log("You made it!");
-                   console.log(data.sessionToken);
+                   WorkoutLog.definition.fetchAll();
+			       WorkoutLog.log.fetchAll();
                 }
+
                 $("#signup-modal").modal("hide");
                 $(".disabled").removeClass("disabled");
                 $("#loginout").text("Logout");
                 // go to define tab
                 $('.nav-tabs a[href="#define"]').tab('show');
+
+                $("#su_username").val("")
+                $("#su_password").val("")
+
              })
              .fail(function() {
                 $("#su_error").text("There was an issue with your username").show();
@@ -39,8 +46,9 @@ $(function() {
             });
             login.done(function(data) {
                 if (data.sessionToken) {
-                WorkoutLog.setAuthHeader(data.sessionToken);
-                console.log(data.sessionToken);
+                    WorkoutLog.setAuthHeader(data.sessionToken);
+                    WorkoutLog.definition.fetchAll();    
+			        WorkoutLog.log.fetchAll();
              }
              
             // TODO: add logic to set user and auth token	
