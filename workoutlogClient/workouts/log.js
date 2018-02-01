@@ -12,6 +12,8 @@ $(function() {
                 }
                 $("#log-definition").children().remove();
                 $("#log-definition").append(opts);
+                $("#update-definitions").children().remove();
+                $("#update-definitions").append(opts)
             },
 
 			setHistory: function() {
@@ -54,35 +56,6 @@ $(function() {
                     });
                 
             },
-
-            delete: function(){
-				var thisLog = {
-					// "this" is the button on the li
-			//.attr("id") targets the value of the id attribute of button
-					id: $(this).attr("id")
-				};
-				var deleteData = { log: thisLog };
-				var deleteLog = $.ajax({
-					type: "DELETE",
-					url: WorkoutLog.API_BASE + "log",
-					data: JSON.stringify(deleteData),
-					contentType: "application/json"
-				});
-
-				// removes list item
-				// references button then grabs closest li
-				$(this).closest("li").remove();
-
-				// deletes item out of workouts array
-				for(var i = 0; i < WorkoutLog.log.workouts.length; i++){
-					if(WorkoutLog.log.workouts[i].id == thisLog.id){
-						WorkoutLog.log.workouts.splice(i, 1);
-					}
-				}
-				deleteLog.fail(function(){
-					console.log("nope. you didn't delete it.");
-				});
-			},
 
             getWorkout: function() {
 				var thisLog = {id: $(this).attr("id")};
@@ -135,6 +108,36 @@ $(function() {
 				});
 
             },
+
+            delete: function(){
+				var thisLog = {
+					// "this" is the button on the li
+			//.attr("id") targets the value of the id attribute of button
+					id: $(this).attr("id")
+				};
+				var deleteData = { log: thisLog };
+				var deleteLog = $.ajax({
+					type: "DELETE",
+					url: WorkoutLog.API_BASE + "log",
+					data: JSON.stringify(deleteData),
+					contentType: "application/json"
+				});
+
+				// removes list item
+				// references button then grabs closest li
+				$(this).closest("li").remove();
+
+				// deletes item out of workouts array
+				for(var i = 0; i < WorkoutLog.log.workouts.length; i++){
+					if(WorkoutLog.log.workouts[i].id == thisLog.id){
+						WorkoutLog.log.workouts.splice(i, 1);
+					}
+				}
+				deleteLog.fail(function(){
+					console.log("nope. you didn't delete it.");
+				});
+			},
+
                 // History
 			fetchAll: function() {
                 var fetchDefs = $.ajax({
@@ -157,6 +160,8 @@ $(function() {
     
     $("#log-save").on("click", WorkoutLog.log.create);
     $("#history-list").delegate('.remove', 'click', WorkoutLog.log.delete);
+    $("#log-update").on("click", WorkoutLog.log.updateWorkout);
+	$("#history-list").delegate('.update', 'click', WorkoutLog.log.getWorkout);
         // fetch history if we are already authenticated and refreshed
     if (window.localStorage.getItem("sessionToken")) {
         WorkoutLog.log.fetchAll();
