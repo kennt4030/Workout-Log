@@ -19,7 +19,11 @@ $(function() {
                     });
 
                     define.done(function(data) {
-                        WorkoutLog.definition.userDefinitions.push(data.definition);
+						WorkoutLog.definition.userDefinitions.push(data.definition);
+						$("#def-description").val("");
+						$("#def-logtype").val("");
+						$('a[href="#log"]').tab("show");
+
                     }); // .push is pushing the information into an array - this will be used when we eventually log a workout based on the category defined.
 		  },
 
